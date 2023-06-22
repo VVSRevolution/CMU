@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11iot_service.proto\x12\x0biot_service\"(\n\x12TemperatureRequest\x12\x12\n\nsensorName\x18\x01 \x01(\t\"\'\n\x10TemperatureReply\x12\x13\n\x0btemperature\x18\x01 \x01(\t\",\n\nLedRequest\x12\r\n\x05state\x18\x01 \x01(\r\x12\x0f\n\x07ledname\x18\x02 \x01(\t\"r\n\x08LedReply\x12\x35\n\x08ledstate\x18\x01 \x03(\x0b\x32#.iot_service.LedReply.LedstateEntry\x1a/\n\rLedstateEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\r:\x02\x38\x01\"\'\n\x11LightLevelRequest\x12\x12\n\nsensorName\x18\x01 \x01(\t\"%\n\x0fLightLevelReply\x12\x12\n\nlightLevel\x18\x01 \x01(\t2\xef\x01\n\nIoTService\x12R\n\x0eSayTemperature\x12\x1f.iot_service.TemperatureRequest\x1a\x1d.iot_service.TemperatureReply\"\x00\x12<\n\x08\x42linkLed\x12\x17.iot_service.LedRequest\x1a\x15.iot_service.LedReply\"\x00\x12O\n\rSayLightLevel\x12\x1e.iot_service.LightLevelRequest\x1a\x1c.iot_service.LightLevelReply\"\x00\x42\x37\n\x1bio.grpc.examples.iotserviceB\x0fIoTServiceProtoP\x01\xa2\x02\x04TEMPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11iot_service.proto\x12\x0biot_service\"(\n\x12TemperatureRequest\x12\x12\n\nsensorName\x18\x01 \x01(\t\"\'\n\x10TemperatureReply\x12\x13\n\x0btemperature\x18\x01 \x01(\t\"J\n\nLedRequest\x12\r\n\x05state\x18\x01 \x01(\r\x12\x0f\n\x07ledname\x18\x02 \x01(\t\x12\r\n\x05login\x18\x03 \x01(\t\x12\r\n\x05senha\x18\x04 \x01(\t\"r\n\x08LedReply\x12\x35\n\x08ledstate\x18\x01 \x03(\x0b\x32#.iot_service.LedReply.LedstateEntry\x1a/\n\rLedstateEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\r:\x02\x38\x01\"\'\n\x11LightLevelRequest\x12\x12\n\nsensorName\x18\x01 \x01(\t\"%\n\x0fLightLevelReply\x12\x12\n\nlightLevel\x18\x01 \x01(\t2\xef\x01\n\nIoTService\x12R\n\x0eSayTemperature\x12\x1f.iot_service.TemperatureRequest\x1a\x1d.iot_service.TemperatureReply\"\x00\x12<\n\x08\x42linkLed\x12\x17.iot_service.LedRequest\x1a\x15.iot_service.LedReply\"\x00\x12O\n\rSayLightLevel\x12\x1e.iot_service.LightLevelRequest\x1a\x1c.iot_service.LightLevelReply\"\x00\x42\x37\n\x1bio.grpc.examples.iotserviceB\x0fIoTServiceProtoP\x01\xa2\x02\x04TEMPb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'iot_service_pb2', globals())
@@ -28,15 +28,15 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _TEMPERATUREREPLY._serialized_start=76
   _TEMPERATUREREPLY._serialized_end=115
   _LEDREQUEST._serialized_start=117
-  _LEDREQUEST._serialized_end=161
-  _LEDREPLY._serialized_start=163
-  _LEDREPLY._serialized_end=277
-  _LEDREPLY_LEDSTATEENTRY._serialized_start=230
-  _LEDREPLY_LEDSTATEENTRY._serialized_end=277
-  _LIGHTLEVELREQUEST._serialized_start=279
-  _LIGHTLEVELREQUEST._serialized_end=318
-  _LIGHTLEVELREPLY._serialized_start=320
-  _LIGHTLEVELREPLY._serialized_end=357
-  _IOTSERVICE._serialized_start=360
-  _IOTSERVICE._serialized_end=599
+  _LEDREQUEST._serialized_end=191
+  _LEDREPLY._serialized_start=193
+  _LEDREPLY._serialized_end=307
+  _LEDREPLY_LEDSTATEENTRY._serialized_start=260
+  _LEDREPLY_LEDSTATEENTRY._serialized_end=307
+  _LIGHTLEVELREQUEST._serialized_start=309
+  _LIGHTLEVELREQUEST._serialized_end=348
+  _LIGHTLEVELREPLY._serialized_start=350
+  _LIGHTLEVELREPLY._serialized_end=387
+  _IOTSERVICE._serialized_start=390
+  _IOTSERVICE._serialized_end=629
 # @@protoc_insertion_point(module_scope)
