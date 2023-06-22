@@ -59,7 +59,7 @@ class IoTServer(iot_service_pb2_grpc.IoTServiceServicer):
         return iot_service_pb2.TemperatureReply(temperature=current_temperature)
     
     def BlinkLed(self, request, context):
-        if(request.login == "adm" and request.senha == "123")
+        if(request.login == "adm" and request.senha == "123"):
             print ("Blink led ", request.ledname)
             print ("...with state ", request.state)
             produce_led_command(request.state, request.ledname)
@@ -67,7 +67,7 @@ class IoTServer(iot_service_pb2_grpc.IoTServiceServicer):
             led_state[request.ledname] = request.state
             return iot_service_pb2.LedReply(ledstate=led_state)
         else: 
-            return "erro"
+            return iot_service_pb2.LedReply(ledstate=led_state)
 
     def SayLightLevel(self, request, context):
         return iot_service_pb2.LightLevelReply(lightLevel=current_light_level)
