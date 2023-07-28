@@ -14,14 +14,20 @@ import ssl
 current_temperature = 'void'
 current_light_level = 'void'
 led_state = {'red':0, 'green':0}
-seguranca = False
+username = "admin"
+password = "admin-secret"
+
+seguranca = False #ativar segurança
+
 # Kafka consumer to run on a separate thread
 def consume_temperature():
     global current_temperature
     if seguranca:
-        ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        ssl_context.load_cert_chain(certfile='path_to_client_certificate', keyfile='path_to_client_key')
-        consumer = KafkaConsumer(bootstrap_servers=KAFKA_SERVER + ':' + KAFKA_PORT, security_protocol='SSL', ssl_context=ssl_context)
+        consumer = KafkaConsumer(bootstrap_servers=KAFKA_SERVER+':'+KAFKA_PORT,
+                                security_protocol='SASL_PLAINTEXT',
+                                sasl_mechanism='PLAIN',
+                                sasl_plain_username=username,
+                                sasl_plain_password=password)
     else:
         consumer = KafkaConsumer(bootstrap_servers=KAFKA_SERVER+':'+KAFKA_PORT)
     consumer.subscribe(topics=('temperature'))
@@ -33,9 +39,11 @@ def consume_temperature():
 def consume_light_level():
     global current_light_level
     if seguranca:
-        ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        ssl_context.load_cert_chain(certfile='path_to_client_certificate', keyfile='path_to_client_key')
-        consumer = KafkaConsumer(bootstrap_servers=KAFKA_SERVER + ':' + KAFKA_PORT, security_protocol='SSL', ssl_context=ssl_context)
+        consumer = KafkaConsumer(bootstrap_servers=KAFKA_SERVER+':'+KAFKA_PORT,
+                                security_protocol='SASL_PLAINTEXT',
+                                sasl_mechanism='PLAIN',
+                                sasl_plain_username=username,
+                                sasl_plain_password=password)
     else:
         consumer = KafkaConsumer(bootstrap_servers=KAFKA_SERVER+':'+KAFKA_PORT)
     consumer.subscribe(topics=('lightlevel'))
@@ -45,9 +53,11 @@ def consume_light_level():
 
 def produce_led_command(state, ledname):
     if seguranca:
-        ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        ssl_context.load_cert_chain(certfile='path_to_client_certificate', keyfile='path_to_client_key')
-        producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER + ':' + KAFKA_PORT, security_protocol='SSL', ssl_context=ssl_context)
+         consumer = KafkaProducer(bootstrap_servers=KAFKA_SERVER+':'+KAFKA_PORT,
+                                security_protocol='SASL_PLAINTEXT',
+                                sasl_mechanism='PLAIN',
+                                sasl_plain_username=username,
+                                sasl_plain_password=password)
     else:
         producer = KafkaProducer(bootstrap_servers=KAFKA_SERVER+':'+KAFKA_PORT)
     producer.send('ledcommand', key=ledname.encode(), value=str(state).encode())
