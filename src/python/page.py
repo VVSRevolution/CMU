@@ -4,17 +4,43 @@ import logging
 import sys
 
 import grpc
-import iot_service_pb2
-import iot_service_pb2_grpc
+#import iot_service_pb2, iot_service_pb2_grpc
+
 
 GRPC_SERVER = ""
 GRPC_PORT = ""
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/",methods =['GET', 'POST'])
 def home():
-    return render_template("table_enviar.html")
+    if request.method == 'GET':
+
+        #CADASTRO DE NOVA ROTINA
+
+            # LOGICA DO CADASTRO
+
+        #TABELA DAS ROTINAS EXIXTENTES
+        headers = ("SE","FAZ")
+        try:
+            print("[MANAGER_HIGH]:\tConsultando Resources em /sons")
+            resources = rotinas.select()
+        except:
+            print("[MANAGER_HIGH]:\tERRO no processo de consulta do Resource em /sons")
+        else:
+            return render_template("table_enviar.html", headings=headers, data=resources)
+    if request.method == 'POST':
+
+
+        headers = ("SE","FAZ")
+        try:
+            print("[MANAGER_HIGH]:\tConsultando Resources em /sons")
+            resources = rotinas.select()
+        except:
+            print("[MANAGER_HIGH]:\tERRO no processo de consulta do Resource em /sons")
+        else:
+            return render_template("table_enviar.html", headings=headers, data=resources)
+
 
 def setup():
     global GRPC_SERVER, GRPC_PORT
