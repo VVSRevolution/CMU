@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=devide-width, initial-scale=1.0"/>
+        <title>Table</title>
+        <link rel="stylesheet" href="/static/table.css" />
+    </head>
+    <body style="font-family: Arial">
+        <table calss="table">
+            <tr class="table__header">
+
+                {% for header in headings %}
+                <th class="table__cell">{{ header }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in data.dicts() %}
+            <tr class="table__row formulario">
+                {{row[2]}}
+                <form method="post">
+                    {% for cell in row %}
+                    <td class="table__cell">{{ row[cell] }}</td>
+                        {% if loop.index == 1 %}
+                            <input id="id" name="id"  type="hidden"  value="{{ row[cell] }}">
+                        {% endif %}
+                        {% if loop.index == 2 %}
+                            <input id="ip" name="ip"  type="hidden"  value="{{ row[cell] }}">
+                        {% endif %}
+                        {% if loop.index == 3 %}
+                            <input id="port" name="port"  type="hidden"  value="{{ row[cell] }}">
+                        {% endif %}                    
+                    {% endfor %}
+                    
+                    <td class="table__cell white">
+                        <button  type="submit" class="delete-button" style="vertical-align:middle">
+                            <span>DELETE</span>
+                        </button>
+                    </td>
+                    <td class="table__cell white">
+                        <input id="row" name="row"  type="hidden"  value="{{ row }}">
+                        <button  type="submit" class="button" style="vertical-align:middle">
+                            <span>OPEN</span>
+                        </button>
+                    </td>
+                </form>
+            </tr> 
+            {% endfor %}
+        </table>
+    </body>
+</html>

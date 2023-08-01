@@ -1,0 +1,9 @@
+.formulario > input {
+        padding: 0 10px;
+        margin: 5px 0;
+}
+
+.botao-registro:hover {
+    background-color: black !important;
+    color: white !important;
+}
