@@ -154,6 +154,28 @@ input:checked + .slider:before {
         luminosidadeSlider.addEventListener('input', function () {
             luminosidadeValue.textContent = luminosidadeSlider.value;
         });
+
+        document.getElementById('submitButton').addEventListener('click', function () {
+            var conditionSelect = document.getElementById('conditionSelect').value;
+            var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
+            
+            var data = {
+                condition: conditionSelect,
+                luminosidade: luminosidadeValue
+            };
+            
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(function (response) {
+                // Processar a resposta do servidor
+            }).catch(function (error) {
+                // Lidar com erros
+            });
+        });
     </script>
 </body>
 </html>
