@@ -95,7 +95,20 @@ input:checked + .slider:before {
     <!-- Divs correspondentes às opções -->
     <div id="horario" class="hidden">
         <h2>Opção: Horário</h2>
-        <!-- Conteúdo específico para a opção "Horário" -->
+        <h2>Então,</h2>
+        <select id="execute">
+            <option value="luz">Luz</option>
+            <option value="teste"> </option>
+        </select> 
+        <select id="lightColor">
+            <option value="luzverde">Luz verde</option>
+            <option value="luzvermelha">Luz vermelha</option>
+        </select> 
+        <label class="switch">
+            <input type="checkbox" id="luzLigadoDesligadoCheckbox">
+            <span class="slider round"></span>
+        </label>
+        <button id="submitButtonTime">Enviar</button>
     </div>
     <div id="luminosidade" class="hidden inline-block">
         Se Luminosidade for
@@ -125,12 +138,25 @@ input:checked + .slider:before {
             <input type="checkbox" id="luzLigadoDesligadoCheckbox">
             <span class="slider round"></span>
         </label>
-        <button id="submitButton">Enviar</button>
+        <button id="submitButtonLight">Enviar</button>
         
     </div>
     <div id="temperatura" class="hidden">
         <h2>Opção: Temperatura</h2>
-        <!-- Conteúdo específico para a opção "Temperatura" -->
+        <h2>Então,</h2>
+        <select id="execute">
+            <option value="luz">Luz</option>
+            <option value="teste"> </option>
+        </select> 
+        <select id="lightColor">
+            <option value="luzverde">Luz verde</option>
+            <option value="luzvermelha">Luz vermelha</option>
+        </select> 
+        <label class="switch">
+            <input type="checkbox" id="luzLigadoDesligadoCheckbox">
+            <span class="slider round"></span>
+        </label>
+        <button id="submitButtonTemp">Enviar</button>
     </div>
 
     <script>
@@ -157,7 +183,71 @@ input:checked + .slider:before {
             luminosidadeValue.textContent = luminosidadeSlider.value;
         });
 
-        document.getElementById('submitButton').addEventListener('click', function () {
+        document.getElementById('submitButtonLight').addEventListener('click', function () {
+            var conditionSelectValue = document.getElementById('conditionSelect').value;
+            var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
+            var lightColorValue = document.getElementById('lightColor').value;
+            var optionSelectValue = document.getElementById('optionSelect').value;
+
+            var executeSelect = document.getElementById('execute');
+            var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
+            var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
+
+            var data = {
+                optionSelect: optionSelectValue,
+                condition: conditionSelectValue,
+                execute: executeValue,
+                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
+                luminosidade: luminosidadeValue,
+                lightColor: lightColorValue,
+            };
+            
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(function (response) {
+                // Processar a resposta do servidor
+            }).catch(function (error) {
+                // Lidar com erros
+            });
+        });
+
+        document.getElementById('submitButtonTemp').addEventListener('click', function () {
+            var conditionSelectValue = document.getElementById('conditionSelect').value;
+            var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
+            var lightColorValue = document.getElementById('lightColor').value;
+            var optionSelectValue = document.getElementById('optionSelect').value;
+
+            var executeSelect = document.getElementById('execute');
+            var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
+            var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
+
+            var data = {
+                optionSelect: optionSelectValue,
+                condition: conditionSelectValue,
+                execute: executeValue,
+                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
+                luminosidade: luminosidadeValue,
+                lightColor: lightColorValue,
+            };
+            
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(function (response) {
+                // Processar a resposta do servidor
+            }).catch(function (error) {
+                // Lidar com erros
+            });
+        });
+
+        document.getElementById('submitButtonTime').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelect').value;
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
             var lightColorValue = document.getElementById('lightColor').value;
