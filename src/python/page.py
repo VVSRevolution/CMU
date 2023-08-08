@@ -17,7 +17,7 @@ def home():
     if request.method == 'GET':
 
         #CADASTRO DE NOVA ROTINA
-
+        json = request.json
             # LOGICA DO CADASTRO
 
         #TABELA DAS ROTINAS EXIXTENTES
@@ -31,6 +31,9 @@ def home():
             return render_template("table_enviar.html", headings=headers, data=resources)
     if request.method == 'POST':
 
+        json = request.json
+
+        print(json)
 
         headers = ("SE","FAZ")
         try:
