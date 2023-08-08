@@ -158,19 +158,20 @@ input:checked + .slider:before {
         });
 
         document.getElementById('submitButton').addEventListener('click', function () {
-            var conditionSelect = document.getElementById('conditionSelect').value;
+            var conditionSelectValue = document.getElementById('conditionSelect').value;
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
-            var lightColor = document.getElementById('lightColor').value;
-            var optionSelect = document.getElementById('optionSelect').value;
+            var lightColorValue = document.getElementById('lightColor').value;
+            var optionSelectValue = document.getElementById('optionSelect').value;
+            var executeValue = document.getElementById('execute').value;
             var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
 
             var data = {
-                optionSelect: optionSelect,
-                condition: conditionSelect,
-                execute: execute,
+                optionSelect: optionSelectValue,
+                condition: conditionSelectValue,
+                execute: executeValue,
                 luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
                 luminosidade: luminosidadeValue,
-                lightColor: lightColor,
+                lightColor: lightColorValue,
             };
             
             fetch('/', {
