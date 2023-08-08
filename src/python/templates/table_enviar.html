@@ -87,7 +87,7 @@ input:checked + .slider:before {
     <h1>Escolha uma opção:</h1>
     <select id="optionSelect">
         <option value="horario">Horário</option>
-        <option value="luminosidade">Luminosidade</option>
+        <option value="luminosidade" selected>Luminosidade</option>
         <option value="temperatura">Temperatura</option>
     </select>
     <br>
@@ -97,6 +97,7 @@ input:checked + .slider:before {
         <h2>Horário</h2>
         Se Horário for 
         <input type="datetime-local" id="time">
+        <h2>Então,</h2>
         <select id="execute">
             <option value="luz">Luz</option>
             <option value="teste"> </option>
@@ -144,7 +145,20 @@ input:checked + .slider:before {
         
     </div>
     <div id="temperatura" class="hidden">
-        <h2>Opção: Temperatura</h2>
+        <h2>Temperatura</h2>
+        Se Temperatura for
+        <select id="conditionSelectTemp">
+            <option value="menor">menor que</option>
+            <option value="menorigual">menor ou igual a </option>
+            <option value="igual">igual a </option>
+            <option value="maior">maior que </option>
+            <option value="maiorigual">maior ou igual a</option>
+        </select>  
+        
+        <span id="temperaturaValue" style="margin-left: 12px ; font-weight: bold; ">25</span> C
+        <br>
+        <br>
+        <input type="range" id="temperaturaSlider" min="0" max="50" value="25">
         <h2>Então,</h2>
         <select id="execute">
             <option value="luz">Luz</option>
@@ -185,6 +199,15 @@ input:checked + .slider:before {
             luminosidadeValue.textContent = luminosidadeSlider.value;
         });
 
+        // Atualiza o valor da temperatura quando o slider é movido
+        var luminosidadeSlider = document.getElementById('temperaturaSlider');
+        var luminosidadeValue = document.getElementById('temperaturaValue');
+        
+        
+        temperaturaSlider.addEventListener('input', function () {
+            temperaturaValue.textContent = temperaturaSlider.value;
+        });
+
         document.getElementById('submitButtonLight').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelect').value;
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
@@ -218,10 +241,10 @@ input:checked + .slider:before {
         });
 
         document.getElementById('submitButtonTemp').addEventListener('click', function () {
-            var conditionSelectValue = document.getElementById('conditionSelect').value;
+            var conditionSelectValue = document.getElementById('conditionSelectTemp').value;
             var lightColorValue = document.getElementById('lightColor').value;
             var optionSelectValue = document.getElementById('optionSelect').value;
-
+            var temperaturaValue = document.getElementById('temperaturaSlider').value;
             var executeSelect = document.getElementById('execute');
             var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
             var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
@@ -231,7 +254,7 @@ input:checked + .slider:before {
                 condition: conditionSelectValue,
                 execute: executeValue,
                 luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
-                luminosidade: luminosidadeValue,
+                temperatura: temperaturaValue,
                 lightColor: lightColorValue,
             };
             
