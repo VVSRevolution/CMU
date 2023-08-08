@@ -13,6 +13,10 @@
             vertical-align: top;
             margin-right: 10px; /* Espaço entre os elementos */
         }
+        input[type="range"] {
+            
+            width: 280px;
+        }
         
     </style>
 </head>
@@ -23,25 +27,29 @@
         <option value="luminosidade">Luminosidade</option>
         <option value="temperatura">Temperatura</option>
     </select>
-
+    <br>
+    <br>
     <!-- Divs correspondentes às opções -->
     <div id="horario" class="hidden">
         <h2>Opção: Horário</h2>
         <!-- Conteúdo específico para a opção "Horário" -->
     </div>
     <div id="luminosidade" class="hidden inline-block">
-        <h2>Se Luminosidade</h2>
+        Se Luminosidade for
         <select id="conditionSelect">
-            <option value="menor">menor</option>
-            <option value="menorigual">menor ou igual</option>
-            <option value="igual">igual</option>
-            <option value="maior">maior</option>
-            <option value="maiorigual">maior ou igual</option>
-        </select>
-        <div>
-            <input type="range" id="luminosidadeSlider" min="0" max="100" value="50">
-            <p>Luminosidade: <span id="luminosidadeValue">50</span></p>
-        </div>
+            <option value="menor">menor que</option>
+            <option value="menorigual">menor ou igual a </option>
+            <option value="igual">igual a </option>
+            <option value="maior">maior que </option>
+            <option value="maiorigual">maior ou igual a</option>
+        </select>  
+        
+        <span id="luminosidadeValue" style="margin-left: 12px ; font-weight: bold; ">50</span>%
+        <br>
+        <br>
+        <input type="range" id="luminosidadeSlider" min="0" max="100" value="50">
+        
+        <h2>ENTÃO</h2>
     </div>
     <div id="temperatura" class="hidden">
         <h2>Opção: Temperatura</h2>
