@@ -94,8 +94,9 @@ input:checked + .slider:before {
     <br>
     <!-- Divs correspondentes às opções -->
     <div id="horario" class="hidden">
-        <h2>Opção: Horário</h2>
-        <h2>Então,</h2>
+        <h2>Horário</h2>
+        Se Horário for 
+        <input type="datetime-local" id="time">
         <select id="execute">
             <option value="luz">Luz</option>
             <option value="teste"> </option>
@@ -111,6 +112,7 @@ input:checked + .slider:before {
         <button id="submitButtonTime">Enviar</button>
     </div>
     <div id="luminosidade" class="hidden inline-block">
+        <h2>Luminosidade</h2>
         Se Luminosidade for
         <select id="conditionSelect">
             <option value="menor">menor que</option>
@@ -217,7 +219,6 @@ input:checked + .slider:before {
 
         document.getElementById('submitButtonTemp').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelect').value;
-            var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
             var lightColorValue = document.getElementById('lightColor').value;
             var optionSelectValue = document.getElementById('optionSelect').value;
 
@@ -249,9 +250,9 @@ input:checked + .slider:before {
 
         document.getElementById('submitButtonTime').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelect').value;
-            var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
             var lightColorValue = document.getElementById('lightColor').value;
             var optionSelectValue = document.getElementById('optionSelect').value;
+            var dateTimeValue = document.getElementById('time').value;
 
             var executeSelect = document.getElementById('execute');
             var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
@@ -259,10 +260,9 @@ input:checked + .slider:before {
 
             var data = {
                 optionSelect: optionSelectValue,
-                condition: conditionSelectValue,
                 execute: executeValue,
+                dateTime: dateTimeValue,
                 luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
-                luminosidade: luminosidadeValue,
                 lightColor: lightColorValue,
             };
             
