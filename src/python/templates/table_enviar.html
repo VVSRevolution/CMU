@@ -1,50 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=devide-width, initial-scale=1.0"/>
-        <title>Table</title>
-        <link rel="stylesheet" href="/static/table.css" />
-    </head>
-    <body style="font-family: Arial">
-        <table calss="table">
-            <tr class="table__header">
+<html>
+<head>
+    <title>Opções Selecionadas</title>
+    <style>
+        /* Estilos CSS para esconder as divs inicialmente */
+        .hidden {
+            display: none;
+        }
 
-                {% for header in headings %}
-                <th class="table__cell">{{ header }}</th>
-                {% endfor %}
-            </tr>
-            {% for row in data.dicts() %}
-            <tr class="table__row formulario">
-                {{row[2]}}
-                <form method="post">
-                    {% for cell in row %}
-                    <td class="table__cell">{{ row[cell] }}</td>
-                        {% if loop.index == 1 %}
-                            <input id="id" name="id"  type="hidden"  value="{{ row[cell] }}">
-                        {% endif %}
-                        {% if loop.index == 2 %}
-                            <input id="ip" name="ip"  type="hidden"  value="{{ row[cell] }}">
-                        {% endif %}
-                        {% if loop.index == 3 %}
-                            <input id="port" name="port"  type="hidden"  value="{{ row[cell] }}">
-                        {% endif %}                    
-                    {% endfor %}
-                    
-                    <td class="table__cell white">
-                        <button  type="submit" class="delete-button" style="vertical-align:middle">
-                            <span>DELETE</span>
-                        </button>
-                    </td>
-                    <td class="table__cell white">
-                        <input id="row" name="row"  type="hidden"  value="{{ row }}">
-                        <button  type="submit" class="button" style="vertical-align:middle">
-                            <span>OPEN</span>
-                        </button>
-                    </td>
-                </form>
-            </tr> 
-            {% endfor %}
-        </table>
-    </body>
+        .inline-block {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 10px; /* Espaço entre os elementos */
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Escolha uma opção:</h1>
+    <select id="optionSelect">
+        <option value="horario">Horário</option>
+        <option value="luminosidade">Luminosidade</option>
+        <option value="temperatura">Temperatura</option>
+    </select>
+
+    <!-- Divs correspondentes às opções -->
+    <div id="horario" class="hidden">
+        <h2>Opção: Horário</h2>
+        <!-- Conteúdo específico para a opção "Horário" -->
+    </div>
+    <div id="luminosidade" class="hidden inline-block">
+        <h2>Se Luminosidade</h2>
+        <select id="conditionSelect">
+            <option value="menor">menor</option>
+            <option value="menorigual">menor ou igual</option>
+            <option value="igual">igual</option>
+            <option value="maior">maior</option>
+            <option value="maiorigual">maior ou igual</option>
+        </select>
+        <div>
+            <input type="range" id="luminosidadeSlider" min="0" max="100" value="50">
+            <p>Luminosidade: <span id="luminosidadeValue">50</span></p>
+        </div>
+    </div>
+    <div id="temperatura" class="hidden">
+        <h2>Opção: Temperatura</h2>
+        <!-- Conteúdo específico para a opção "Temperatura" -->
+    </div>
+
+    <script>
+        // Função para mostrar a div correspondente à opção selecionada
+        document.getElementById('optionSelect').addEventListener('change', function () {
+            // Esconde todas as divs primeiro
+            var allDivs = document.querySelectorAll('.hidden');
+            allDivs.forEach(function (div) {
+                div.style.display = 'none';
+            });
+
+            // Mostra a div correspondente à opção selecionada
+            var selectedOption = this.value;
+            var selectedDiv = document.getElementById(selectedOption);
+            selectedDiv.style.display = 'block';
+        });
+
+        // Atualiza o valor da luminosidade quando o slider é movido
+        var luminosidadeSlider = document.getElementById('luminosidadeSlider');
+        var luminosidadeValue = document.getElementById('luminosidadeValue');
+        
+        luminosidadeSlider.addEventListener('input', function () {
+            luminosidadeValue.textContent = luminosidadeSlider.value;
+        });
+    </script>
+</body>
 </html>
