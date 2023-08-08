@@ -79,4 +79,4 @@ def thermometer():
 if __name__ == "__main__":
     logging.basicConfig()
     setup()
-    app.run(debug=True,  use_reloader=False)
+    app.run(debug=True,  use_reloader=False, port=1234)
