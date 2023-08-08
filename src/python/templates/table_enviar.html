@@ -162,7 +162,9 @@ input:checked + .slider:before {
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
             var lightColorValue = document.getElementById('lightColor').value;
             var optionSelectValue = document.getElementById('optionSelect').value;
-            var executeValue = document.getElementById('execute').value;
+
+            var executeSelect = document.getElementById('execute');
+            var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
             var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
 
             var data = {
