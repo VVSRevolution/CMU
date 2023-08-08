@@ -115,13 +115,14 @@ input:checked + .slider:before {
         <h2>Então,</h2>
         <select id="execute">
             <option value="luz">Luz</option>
+            <option value="teste"> </option>
         </select> 
         <select id="lightColor">
             <option value="luzverde">Luz verde</option>
             <option value="luzvermelha">Luz vermelha</option>
         </select> 
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" id="luzLigadoDesligadoCheckbox">
             <span class="slider round"></span>
         </label>
         <button id="submitButton">Enviar</button>
@@ -161,12 +162,13 @@ input:checked + .slider:before {
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
             var lightColor = document.getElementById('lightColor').value;
             var optionSelect = document.getElementById('optionSelect').value;
-            var optionSelect = document.getElementById('execute').value;
+            var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
 
             var data = {
                 optionSelect: optionSelect,
                 condition: conditionSelect,
                 execute: execute,
+                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
                 luminosidade: luminosidadeValue,
                 lightColor: lightColor,
             };
