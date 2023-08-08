@@ -113,7 +113,7 @@ input:checked + .slider:before {
         <input type="range" id="luminosidadeSlider" min="0" max="100" value="50">
         
         <h2>Então,</h2>
-        <select id="lightColor">
+        <select id="execute">
             <option value="luz">Luz</option>
         </select> 
         <select id="lightColor">
@@ -151,6 +151,7 @@ input:checked + .slider:before {
         var luminosidadeSlider = document.getElementById('luminosidadeSlider');
         var luminosidadeValue = document.getElementById('luminosidadeValue');
         
+        
         luminosidadeSlider.addEventListener('input', function () {
             luminosidadeValue.textContent = luminosidadeSlider.value;
         });
@@ -158,10 +159,16 @@ input:checked + .slider:before {
         document.getElementById('submitButton').addEventListener('click', function () {
             var conditionSelect = document.getElementById('conditionSelect').value;
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
-            
+            var lightColor = document.getElementById('lightColor').value;
+            var optionSelect = document.getElementById('optionSelect').value;
+            var optionSelect = document.getElementById('execute').value;
+
             var data = {
+                optionSelect: optionSelect,
                 condition: conditionSelect,
-                luminosidade: luminosidadeValue
+                execute: execute,
+                luminosidade: luminosidadeValue,
+                lightColor: lightColor,
             };
             
             fetch('/', {
