@@ -21,16 +21,49 @@
             width: 100%;
             padding: 10px;
             font-size: 16px;
+            border-radius: 10px; /* Adicione o arredondamento de borda */
+            border: 0cm solid #ffffff;  
+            text-align: center; /* Centralizar o texto */
+            font-size: 2vw; /* Ajustar o tamanho do texto */
+
+
         }
 
         .option-container {
-            background-color: white; /* Fundo branco para os quadrados de opção */
+            background-color: white; /* Fundo 
+            branco para os quadrados de opção */
             display: none;
             padding: 20px;
-            border: 1px solid #898989;
+            border: 1px solid #ffffff;
             margin-top: 20px;
-        }
+            border-radius: 10px; /* Adicione o arredondamento de borda */
+            text-align: center; /* Centralizar o texto */
+            font-size: 2vw; /* Ajustar o tamanho do texto */
+            
 
+
+        }
+        .option-container button {
+            display: block;
+            margin: 20px auto 0; /* Centralizar verticalmente e centralizar horizontalmente */
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%; /* Largura igual ao contêiner da opção */
+            border-radius: 10px; /* Adicione o arredondamento de borda */
+            font-size: 2vw; /* Ajustar o tamanho do texto */
+
+        }
+        .option-container input[type="datetime-local"],
+        .option-container input[type="range"],
+        .option-container select {
+            font-size: 1em; /* Ajuste conforme necessário */
+            border-radius: 5px; /* Adicione o arredondamento de borda */
+            padding: 5px;
+
+        }
         .show {
             display: block;
         }
@@ -42,18 +75,64 @@
 
         input[type="range"] {
             width: 100%;
+            
+        }
+/* Estilo do interruptor (checkbox) */
+.switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            vertical-align: middle; /* Alinhar com o texto verticalmente */
         }
 
-        button {
-            display: block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
         }
 
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
         @media (max-width: 600px) {
             .option-container {
                 padding: 10px;
@@ -85,6 +164,7 @@
                 <option value="luzverde">verde</option>
                 <option value="luzvermelha">vermelha</option>
             </select> 
+            <br>
             <label class="switch">
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
                 <span class="slider round">Ligar luz</span>
@@ -120,6 +200,7 @@
                 <option value="luzverde">verde</option>
                 <option value="luzvermelha">vermelha</option>
             </select> 
+            <br>
             <label class="switch">
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
                 <span class="slider round"> Ligar luz</span>
@@ -154,6 +235,7 @@
                 <option value="luzverde">verde</option>
                 <option value="luzvermelha">vermelha</option>
             </select> 
+            <br>
             <label class="switch">
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
                 <span class="slider round"> Ligar luz</span>
