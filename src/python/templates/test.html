@@ -7,9 +7,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0 20px;
-            background-color: #f0f0f0; /* Defina a cor de fundo como cinza */
-
+            padding: 0;
         }
 
         h1 {
@@ -24,10 +22,9 @@
         }
 
         .option-container {
-            background-color: white; /* Fundo branco para os quadrados de opção */
             display: none;
             padding: 20px;
-            border: 1px solid #898989;
+            border: 1px solid #ccc;
             margin-top: 20px;
         }
 
@@ -82,12 +79,12 @@
                 <option value="teste"> </option>
             </select> 
             <select id="lightColor">
-                <option value="luzverde">verde</option>
-                <option value="luzvermelha">vermelha</option>
+                <option value="luzverde">Luz verde</option>
+                <option value="luzvermelha">Luz vermelha</option>
             </select> 
             <label class="switch">
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
-                <span class="slider round">Ligar luz</span>
+                <span class="slider round"></span>
             </label>
             <button id="submitButtonTime">Enviar</button>
     </div>
@@ -117,17 +114,16 @@
                 <option value="teste"> </option>
             </select> 
             <select id="lightColor">
-                <option value="luzverde">verde</option>
-                <option value="luzvermelha">vermelha</option>
+                <option value="luzverde">Luz verde</option>
+                <option value="luzvermelha">Luz vermelha</option>
             </select> 
             <label class="switch">
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
-                <span class="slider round"> Ligar luz</span>
+                <span class="slider round"></span>
             </label>
             <button id="submitButtonLight">Enviar</button>
+        </div>
     </div>
-    
-
     <div id="temperatura" class="option-container">
         <!-- Conteúdo da opção Temperatura -->
         
@@ -151,12 +147,12 @@
                 <option value="teste"> </option>
             </select> 
             <select id="lightColor">
-                <option value="luzverde">verde</option>
-                <option value="luzvermelha">vermelha</option>
+                <option value="luzverde">Luz verde</option>
+                <option value="luzvermelha">Luz vermelha</option>
             </select> 
             <label class="switch">
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
-                <span class="slider round"> Ligar luz</span>
+                <span class="slider round"></span>
             </label>
             <button id="submitButtonTemp">Enviar</button>
     </div>
@@ -169,11 +165,11 @@
 
         optionSelect.addEventListener('change', function () {
             optionContainers.forEach(container => {
-                container.classList.add('hidden');
+                container.classList.remove('show');
             });
 
             const selectedOption = document.getElementById(optionSelect.value);
-            selectedOption.classList.remove('hidden');
+            selectedOption.classList.add('show');
         });
 
         // Restante do seu código JavaScript aqui...
