@@ -75,6 +75,24 @@
             width: 100%;
             
         }
+        #lightColor {
+            position: relative;
+        }
+
+        #lightColor option::before {
+            content: '\25CF'; /* Código do caractere da bolinha (●) */
+            margin-right: 5px; /* Espaçamento entre a bolinha e o texto */
+            color: inherit; /* Usa a cor do texto do option */
+        }
+
+        #lightColor option[data-color="green"]::before {
+            color: green;
+        }
+
+        #lightColor option[data-color="red"]::before {
+            color: red;
+        }
+
 /* Estilo do interruptor (checkbox) */
 .switch {
             position: relative;
@@ -89,7 +107,23 @@
             width: 0;
             height: 0;
         }
+        .slider-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: clamp(16px, 2vw, 80px); /
+        }
 
+        .slider-label:first-child {
+            right: 70px;
+            padding-right: 10px;
+        }
+
+        .slider-label:last-child {
+            left: 70px;
+            padding-left: 10px;
+        }
+        
         .slider {
             position: absolute;
             cursor: pointer;
@@ -164,8 +198,10 @@
             </select> 
             <br>
             <label class="switch">
+                <span class="slider-label">Desligar</span>
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
-                <span class="slider round">Ligar luz</span>
+                <span class="slider round"></span>
+                <span class="slider-label">Ligar</span>
             </label>
             <button id="submitButtonTime">Enviar</button>
     </div>
@@ -200,8 +236,10 @@
             </select> 
             <br>
             <label class="switch">
+                <span class="slider-label">Desligar</span>
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
-                <span class="slider round"> Ligar luz</span>
+                <span class="slider round"></span>
+                <span class="slider-label">Ligar</span>
             </label>
             <button id="submitButtonLight">Enviar</button>
     </div>
@@ -235,8 +273,10 @@
             </select> 
             <br>
             <label class="switch">
+                <span class="slider-label">Desligar</span>
                 <input type="checkbox" id="luzLigadoDesligadoCheckbox">
-                <span class="slider round"> Ligar luz</span>
+                <span class="slider round"></span>
+                <span class="slider-label">Ligar</span>
             </label>
             <button id="submitButtonTemp">Enviar</button>
     </div>
