@@ -1,6 +1,6 @@
 from flask import *
 from db import *
-import logging
+import logging, threading, time
 import sys
 
 import grpc
@@ -75,6 +75,12 @@ def rotines():
     else:
         return render_template("rotinas.html",headings=headers, data=resources)
 
+def checkrotines():
+    querry = rotinas.select()
+    for i in querry:
+        print(i.condicao)
+    
+    time.sleep(2)
 
 def setup():
     global GRPC_SERVER, GRPC_PORT
@@ -113,4 +119,6 @@ def thermometer():
 if __name__ == "__main__":
     logging.basicConfig()
     setup()
+    check = threading.Thread(target=checkrotines)
+    check.start()
     app.run(debug=True,  use_reloader=False, port=12345)
