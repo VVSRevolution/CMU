@@ -4,6 +4,40 @@
     <title>Opções Selecionadas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+         .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: lightgray;
+        }
+
+        .title {
+            font-size: clamp(16px, 4vw, 80px); 
+            align-items: center;
+
+        }
+
+        .btn {
+            padding: 10px 25px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+
+            margin-left: auto; /* Move o botão para a direita */
+            text-decoration: none; /* Remover sublinhado */
+            border-radius: 5px; /* Adicione o arredondamento de borda */
+            font-size: clamp(16px, 1.5vw, 80px); 
+
+
+
+        }
+
+        .right-content {
+            display: flex;
+            align-items: center;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -56,6 +90,7 @@
         }
         .option-container input[type="datetime-local"],
         .option-container input[type="range"],
+        
         .option-container select {
             font-size: clamp(16px, 1vw, 80px); /
             border-radius: 5px; /* Adicione o arredondamento de borda */
@@ -75,23 +110,7 @@
             width: 100%;
             
         }
-        #lightColor {
-            position: relative;
-        }
 
-        #lightColor option::before {
-            content: '\25CF'; /* Código do caractere da bolinha (●) */
-            margin-right: 5px; /* Espaçamento entre a bolinha e o texto */
-            color: inherit; /* Usa a cor do texto do option */
-        }
-
-        #lightColor option[data-color="green"]::before {
-            color: green;
-        }
-
-        #lightColor option[data-color="red"]::before {
-            color: red;
-        }
 
 /* Estilo do interruptor (checkbox) */
 .switch {
@@ -173,7 +192,14 @@
     </style>
 </head>
 <body>
-    <h1>Escolha uma opção:</h1>
+
+    <div class="right-content">
+         <h1 class="title">Escolha uma opção: </h1>
+        <a class="btn" href="/rotines">Rotinas</a>
+    </div>
+
+   
+
     <select id="optionSelect">
         <option value="horario">Horário</option>
         <option value="luminosidade" selected>Luminosidade</option>
@@ -193,8 +219,8 @@
                 <option value="teste"> </option>
             </select> 
             <select id="lightColor">
-                <option value="luzverde">verde</option>
-                <option value="luzvermelha">vermelha</option>
+                <option value="verde">verde</option>
+                <option value="vermelha">vermelha</option>
             </select> 
             <br>
             <label class="switch">
@@ -231,8 +257,8 @@
                 <option value="teste"> </option>
             </select> 
             <select id="lightColor">
-                <option value="luzverde">verde</option>
-                <option value="luzvermelha">vermelha</option>
+                <option value="verde">verde</option>
+                <option value="vermelha">vermelha</option>
             </select> 
             <br>
             <label class="switch">
@@ -268,8 +294,8 @@
                 <option value="teste"> </option>
             </select> 
             <select id="lightColor">
-                <option value="luzverde">verde</option>
-                <option value="luzvermelha">vermelha</option>
+                <option value="verde">verde</option>
+                <option value="vermelha">vermelha</option>
             </select> 
             <br>
             <label class="switch">
@@ -329,6 +355,7 @@
             temperaturaValue.textContent = temperaturaSlider.value;
         });
 
+//butao lumunosidade 
         document.getElementById('submitButtonLight').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelect').value;
             var luminosidadeValue = document.getElementById('luminosidadeSlider').value;
@@ -360,7 +387,7 @@
                 // Lidar com erros
             });
         });
-
+//butao temp
         document.getElementById('submitButtonTemp').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelectTemp').value;
             var lightColorValue = document.getElementById('lightColor').value;
@@ -391,7 +418,7 @@
                 // Lidar com erros
             });
         });
-
+//butao
         document.getElementById('submitButtonTime').addEventListener('click', function () {
             var conditionSelectValue = document.getElementById('conditionSelect').value;
             var lightColorValue = document.getElementById('lightColor').value;

@@ -9,8 +9,8 @@ class BaseModel(peewee.Model):
         database = db
 
 class rotinas(BaseModel):
-    se = peewee.TextField(default=None)
-    entao = peewee.TextField(default=None)
+    condicao = peewee.TextField(default=None)
+    estado = peewee.TextField(default=None)
 
 
 

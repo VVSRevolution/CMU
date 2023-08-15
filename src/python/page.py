@@ -14,35 +14,66 @@ app = Flask(__name__)
 
 @app.route("/",methods =['GET', 'POST'])
 def home():
+
     if request.method == 'GET':
 
-        #CADASTRO DE NOVA ROTINA
-        json = request.json
-            # LOGICA DO CADASTRO
-
-        #TABELA DAS ROTINAS EXIXTENTES
-        headers = ("SE","FAZ")
         try:
             print("[MANAGER_HIGH]:\tConsultando Resources em /sons")
             resources = rotinas.select()
         except:
             print("[MANAGER_HIGH]:\tERRO no processo de consulta do Resource em /sons")
-        else:
-            return render_template("table_enviar.html", headings=headers, data=resources)
+        
     if request.method == 'POST':
 
         json = request.json
 
         print(json)
 
-        headers = ("SE","FAZ")
         try:
             print("[MANAGER_HIGH]:\tConsultando Resources em /sons")
             resources = rotinas.select()
         except:
             print("[MANAGER_HIGH]:\tERRO no processo de consulta do Resource em /sons")
-        else:
-            return render_template("table_enviar.html", headings=headers, data=resources)
+        
+        condicional = ''
+
+        if 'condition' in json:
+            condicional += json['optionSelect'] 
+            if(json['condition'] == "menor"): condicional += " < "
+            if(json['condition'] == "menorigual"): condicional += " <= "
+            if(json['condition'] == "igual"): condicional += " = "
+            if(json['condition'] == "maiorr"): condicional += " > "
+            if(json['condition'] == "maiorigual"): condicional += " < "
+            if json['optionSelect'] == "luminosidade": condicional += json['luminosidade']
+            if json['optionSelect'] == "temperatura": condicional += json['temperatura']
+        if 'dataTime' in json:
+            condicional += "Data"
+            if(json['dataTime']):  condicional += json['dataTime']
+
+        entao = ''
+        entao += json['execute']
+        entao += ' '
+        entao += json['lightColor']
+        if json['luzLigadoDesligadoCheckbox'] == True: entao += " Ligada"
+        else: entao += " Desligada"
+
+        query = rotinas.create(
+            condicao=condicional,
+            estado=entao
+        )
+
+    return render_template("table_enviar.html")
+
+@app.route("/rotines",methods =['GET', 'POST'])
+def rotines():
+    headers = ("ID","Condicional","Estado")
+    try:
+        print("\033[1m[ROTINE]:\033[0m\tConsultando Rotinas")
+        resources = rotinas.select()
+    except:
+        print("\033[1m[ROTINE]:\033[0m\tERRO no processo de consulta do Rotinas")
+    else:
+        return render_template("rotinas.html",headings=headers, data=resources)
 
 
 def setup():
