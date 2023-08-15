@@ -64,16 +64,30 @@ def home():
 
     return render_template("table_enviar.html")
 
+def delete_rotina(id):
+    # Implemente a lógica para excluir do banco de dados aqui
+    pass    
+
+@app.route("/delete_rotine/<int:rotine_id>", methods=['POST'])
+def delete_rotine(rotine_id):
+    delete_rotina(rotine_id)
+    return redirect(url_for('rotines'))    
+
 @app.route("/rotines",methods =['GET', 'POST'])
 def rotines():
-    headers = ("ID","Condicional","Estado")
-    try:
-        print("\033[1m[ROTINE]:\033[0m\tConsultando Rotinas")
-        resources = rotinas.select()
-    except:
-        print("\033[1m[ROTINE]:\033[0m\tERRO no processo de consulta do Rotinas")
-    else:
-        return render_template("rotinas.html",headings=headers, data=resources)
+    if request.method == 'GET':
+        headers = ("ID","Condicional","Estado")
+        try:
+            print("\033[1m[ROTINE]:\033[0m\tConsultando Rotinas")
+            resources = rotinas.select()
+        except:
+            print("\033[1m[ROTINE]:\033[0m\tERRO no processo de consulta do Rotinas")
+        else:
+            return render_template("rotinas.html",headings=headers, data=resources)
+    if request.method == 'POST':
+        id = request.form.get('id')
+        print(id)
+        return "teste"
 
 def checkrotines():
     querry = rotinas.select()
