@@ -32,10 +32,10 @@
                     {% endfor %}
                     
                     <td class="table__cell white">
-                        <input id="row" name="row"  type="hidden"  value="{{ row }}">
-                        <button  type="submit" class="delete-button" style="vertical-align:middle">
-                            <span>DELETE</span>
-                        </button>
+                        <form action="/rotines" method="post">
+                            <input id="row" type="hidden" name="row" value="{{ row }}">
+                            <button type="submit" class="delete-button">DELETE</button>
+                        </form>
                     </td>
                     <td class="table__cell white">
                         <input id="row" name="row"  type="hidden"  value="{{ row }}">
