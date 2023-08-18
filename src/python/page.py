@@ -5,7 +5,7 @@ import sys
 from datetime import datetime
 
 import grpc
-#import iot_service_pb2, iot_service_pb2_grpc
+import iot_service_pb2, iot_service_pb2_grpc
 
 
 GRPC_SERVER = ""
@@ -104,23 +104,90 @@ def rotines():
         id = request.form.get('id')
         print(id)
         return redirect(url_for('delete_rotine', rotine_id = id)) 
+    
+
+def checkCondicionalTemperatura(num, cond, comp, estado):
+    atuador, cor, status = estado
+    print("atuador:" + atuador)
+    print("cor:" + cor)
+    print("status:" + status)
+    if(cond == ">"):
+        if (num > int(comp)):
+            if(atuador == "luz"):
+                blink
+            pass # Condição no caso TEMP > 
+        
+    elif(cond == ">="):
+        if (num >= int(comp)):
+            pass # Condição no caso TEMP >= COND2
+    elif(cond == "<="):
+        if (num <= int(comp)):
+            pass # Condição no caso TEMP <= COND2
+    elif(cond == "="):
+        if (num == int(comp)):
+            pass # Condição no caso TEMP = COND2
+    elif(cond == "<"):
+        if (num < int(comp)):
+            pass # Condição no caso TEMP < COND2
+
+def mudaStatus(status):
+    return 0 if status == "Desligada" else 1
+
+def mudaCor(cor):
+    return "green" if cor == "verde" else "red"
+
+def checkCondicionalLuminosidade(num, cond, comp, estado):
+    atuador, cor, status = estado
+    status = mudaStatus(status)
+    cor = mudaCor(cor)
+    print("atuador:" + atuador)
+    print(f"cor:{cor}")
+    print(f"status:{status}")
+    if(cond == ">"):
+        if (num > int(comp)):
+            ligar_luz(cor, status)
+        # elif ...
+    elif(cond == ">="):
+        if (num >= int(comp)):
+            ligar_luz(cor, status)
+        # elif ...
+    elif(cond == "<="):
+        if (num <= int(comp)):
+            ligar_luz(cor, status)
+        # elif ...
+    elif(cond == "="):
+        if (num == int(comp)):
+            ligar_luz(cor, status)
+        # elif ...
+    elif(cond == "<"):
+        if (num < int(comp)):
+            ligar_luz(cor, status)
+        # elif ...
+
+def splitString(string):
+    return string.split(sep=" ")
+
 
 def checkrotines():
+    print("checkrotines called")
     while(True):
         querry = rotinas.select()
         for i in querry:
             print(f"{i.condicao} --> {i.estado}")
-            condicao = i.condicao.split(sep=" ")
+            condicao = i.condicao.split(" ")
+            estado = i.estado.split(" ")
+            temp = thermometer()
+            light = lightsensor()
 
 
             if condicao[0] == "temperatura":
-                pass
+                checkCondicionalTemperatura(temp, condicao[1], condicao[2], estado)
             if condicao[0] == "luminosidade":
-                pass
+                checkCondicionalLuminosidade(light, condicao[1], condicao[2], estado)
             if condicao[0] == "Data":
                 pass
         
-        time.sleep(2)
+                time.sleep(2)
 
 
 def setup():
@@ -140,22 +207,33 @@ def ligar_luz(luz ,estado):
     else:
         print("Led state is off")
 
-def lightsensor():
-    global GRPC_SERVER, GRPC_PORT
-    with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
-        stub = iot_service_pb2_grpc.IoTServiceStub(channel)
-        response = stub.SayLightLevel(iot_service_pb2.LightLevelRequest(sensorName='my_sensor'))
+#def adjustLightLevel(lightLevelString):
+#    lightLevelNumber = int(lightLevelString)
+#    return lightLevelNumber - 100)
 
-    print("Light level received: " + response.lightLevel)
-    return response.lightLevel
+def lightsensor():
+    try:
+        global GRPC_SERVER, GRPC_PORT
+        with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
+            stub = iot_service_pb2_grpc.IoTServiceStub(channel)
+            response = stub.SayLightLevel(iot_service_pb2.LightLevelRequest(sensorName='my_sensor'))
+
+        print("Light level received: " + response.lightLevel)
+        return response.lightLevel
+    except:
+        return 25
 
 def thermometer():
-    with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
+    print("thermometer called")
+
+    with grpc.insecure_channel('44.203.58.51:50051') as channel:
         stub = iot_service_pb2_grpc.IoTServiceStub(channel)
         response = stub.SayTemperature(iot_service_pb2.TemperatureRequest(sensorName='my_sensor'))
 
+    print("thermometer try called")
     print("Temperature received: " + response.temperature)
     return response.temperature
+
 
 if __name__ == "__main__":
     logging.basicConfig()
