@@ -2,6 +2,7 @@ from flask import *
 from db import *
 import logging, threading, time
 import sys
+from datetime import datetime
 
 import grpc
 #import iot_service_pb2, iot_service_pb2_grpc
@@ -46,9 +47,17 @@ def home():
             if(json['condition'] == "maiorigual"): condicional += " < "
             if json['optionSelect'] == "luminosidade": condicional += json['luminosidade']
             if json['optionSelect'] == "temperatura": condicional += json['temperatura']
-        if 'dataTime' in json:
-            condicional += "Data"
-            if(json['dataTime']):  condicional += json['dataTime']
+        if 'dateTime' in json:
+            condicional += "Data "
+
+            # Converter a string para um objeto datetime
+            data_hora_obj = datetime.strptime(json['dateTime'], "%Y-%m-%dT%H:%M")
+
+            # Formatar a data e hora no formato desejado
+            data_hora_formatada = data_hora_obj.strftime("%d/%m/%Y %H:%M")
+
+            condicional += data_hora_formatada
+
 
         entao = ''
         entao += json['execute']
@@ -64,22 +73,29 @@ def home():
 
     return render_template("table_enviar.html")
 
-def delete_rotina(id):
-    # Implemente a lógica para excluir do banco de dados aqui
-    pass    
 
-@app.route("/delete_rotine/<int:rotine_id>", methods=['POST'])
+
+@app.route("/delete_rotine/<int:rotine_id>")
 def delete_rotine(rotine_id):
-    delete_rotina(rotine_id)
+
+    resources = rotinas.get(rotinas.id == rotine_id)
+    try:
+        resources.delete_instance()
+        print("Item with ID", rotine_id, "deleted successfully.")
+
+    except resources.DoesNotExist:
+        print("Item with ID", rotine_id, "not found.")
+
     return redirect(url_for('rotines'))    
 
 @app.route("/rotines",methods =['GET', 'POST'])
 def rotines():
     if request.method == 'GET':
         headers = ("ID","Condicional","Estado")
+        resources = rotinas.select()
         try:
             print("\033[1m[ROTINE]:\033[0m\tConsultando Rotinas")
-            resources = rotinas.select()
+            
         except:
             print("\033[1m[ROTINE]:\033[0m\tERRO no processo de consulta do Rotinas")
         else:
@@ -87,14 +103,25 @@ def rotines():
     if request.method == 'POST':
         id = request.form.get('id')
         print(id)
-        return "teste"
+        return redirect(url_for('delete_rotine', rotine_id = id)) 
 
 def checkrotines():
-    querry = rotinas.select()
-    for i in querry:
-        print(i.condicao)
-    
-    time.sleep(2)
+    while(True):
+        querry = rotinas.select()
+        for i in querry:
+            print(f"{i.condicao} --> {i.estado}")
+            condicao = i.condicao.split(sep=" ")
+
+
+            if condicao[0] == "temperatura":
+                pass
+            if condicao[0] == "luminosidade":
+                pass
+            if condicao[0] == "Data":
+                pass
+        
+        time.sleep(2)
+
 
 def setup():
     global GRPC_SERVER, GRPC_PORT
