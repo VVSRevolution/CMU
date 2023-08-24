@@ -189,6 +189,26 @@
                 padding: 10px;
             }
         }
+
+        .submitButton {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .submitButton:active {
+            background-color: #ffc107;
+            transform: scale(0.95);
+        }
+
+        .submitButton:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -229,7 +249,7 @@
                 <span class="slider round"></span>
                 <span class="slider-label">Ligar</span>
             </label>
-            <button id="submitButtonTime">Enviar</button>
+            <button id="submitButtonTime" class="submitButton">Enviar</button>
     </div>
     
 <!-- Luminosidade -->
@@ -267,7 +287,7 @@
                 <span class="slider round"></span>
                 <span class="slider-label">Ligar</span>
             </label>
-            <button id="submitButtonLight">Enviar</button>
+            <button id="submitButtonLight" class="submitButton">Enviar</button>
     </div>
     
 
@@ -304,7 +324,7 @@
                 <span class="slider round"></span>
                 <span class="slider-label">Ligar</span>
             </label>
-            <button id="submitButtonTemp">Enviar</button>
+            <button id="submitButtonTemp" class="submitButton">Enviar</button>
     </div>
 
     
