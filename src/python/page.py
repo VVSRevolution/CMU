@@ -9,8 +9,8 @@ import grpc
 import iot_service_pb2, iot_service_pb2_grpc
 
 
-GRPC_SERVER = "3.89.99.208"
-GRPC_PORT = "50051"
+GRPC_SERVER = '3.89.99.208'
+GRPC_PORT = '50051'
 
 app = Flask(__name__)
 
@@ -226,8 +226,9 @@ def lightsensor():
 
 def thermometer():
     print("thermometer called")
+    logging.basicConfig()
 
-    with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
+    with grpc.insecure_channel(f"{GRPC_SERVER}:{GRPC_PORT}") as channel:
         stub = iot_service_pb2_grpc.IoTServiceStub(channel)
         response = stub.SayTemperature(iot_service_pb2.TemperatureRequest(sensorName='my_sensor'))
 
