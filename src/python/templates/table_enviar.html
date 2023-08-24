@@ -225,7 +225,7 @@
             <br>
             <label class="switch">
                 <span class="slider-label">Desligar</span>
-                <input type="checkbox" id="luzLigadoDesligadoCheckbox">
+                <input type="checkbox" id="luzLigadoDesligadoCheckboxHorario">
                 <span class="slider round"></span>
                 <span class="slider-label">Ligar</span>
             </label>
@@ -263,7 +263,7 @@
             <br>
             <label class="switch">
                 <span class="slider-label">Desligar</span>
-                <input type="checkbox" id="luzLigadoDesligadoCheckbox">
+                <input type="checkbox" id="luzLigadoDesligadoCheckboxLuminosidade">
                 <span class="slider round"></span>
                 <span class="slider-label">Ligar</span>
             </label>
@@ -300,7 +300,7 @@
             <br>
             <label class="switch">
                 <span class="slider-label">Desligar</span>
-                <input type="checkbox" id="luzLigadoDesligadoCheckbox">
+                <input type="checkbox" id="luzLigadoDesligadoCheckboxTemperatura">
                 <span class="slider round"></span>
                 <span class="slider-label">Ligar</span>
             </label>
@@ -364,13 +364,13 @@
 
             var executeSelect = document.getElementById('execute');
             var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
-            var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
+            var luzLigadoDesligadoCheckboxLuminosidade = document.getElementById('luzLigadoDesligadoCheckboxLuminosidade').checked;
 
             var data = {
                 optionSelect: optionSelectValue,
                 condition: conditionSelectValue,
                 execute: executeValue,
-                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
+                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckboxLuminosidade,
                 luminosidade: luminosidadeValue,
                 lightColor: lightColorValue,
             };
@@ -395,13 +395,13 @@
             var temperaturaValue = document.getElementById('temperaturaSlider').value;
             var executeSelect = document.getElementById('execute');
             var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
-            var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
+            var luzLigadoDesligadoCheckboxTemperatura = document.getElementById('luzLigadoDesligadoCheckboxTemperatura').checked;
 
             var data = {
                 optionSelect: optionSelectValue,
                 condition: conditionSelectValue,
                 execute: executeValue,
-                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
+                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckboxTemperatura,
                 temperatura: temperaturaValue,
                 lightColor: lightColorValue,
             };
@@ -427,13 +427,13 @@
 
             var executeSelect = document.getElementById('execute');
             var executeValue = executeSelect.options[executeSelect.selectedIndex].value;
-            var luzLigadoDesligadoCheckbox = document.getElementById('luzLigadoDesligadoCheckbox').checked;
+            var luzLigadoDesligadoCheckboxHorario = document.getElementById('luzLigadoDesligadoCheckboxHorario').checked;
 
             var data = {
                 optionSelect: optionSelectValue,
                 execute: executeValue,
                 dateTime: dateTimeValue,
-                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckbox,
+                luzLigadoDesligadoCheckbox: luzLigadoDesligadoCheckboxHorario,
                 lightColor: lightColorValue,
             };
             
