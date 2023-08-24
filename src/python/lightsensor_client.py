@@ -14,7 +14,8 @@ def getluz():
         stub = iot_service_pb2_grpc.IoTServiceStub(channel)
         response = stub.SayLightLevel(iot_service_pb2.LightLevelRequest(sensorName='my_sensor'))
 
-    print("Light level received: " + response.lightLevel)
+    print(f"\tLight level received:  {100 - int(response.lightLevel)}%")
+    return 100 - int(response.lightLevel)
 
 if __name__ == '__main__':
     logging.basicConfig()

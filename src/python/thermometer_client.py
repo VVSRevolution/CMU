@@ -14,7 +14,7 @@ def gettemperatura():
         stub = iot_service_pb2_grpc.IoTServiceStub(channel)
         response = stub.SayTemperature(iot_service_pb2.TemperatureRequest(sensorName='my_sensor'))
 
-    print("Temperature received: " + response.temperature)
+    print(f"\tTemperature received: {response.temperature}ºC")
     return response.temperature
 
 

@@ -107,43 +107,46 @@ def rotines():
         print(id)
         return redirect(url_for('delete_rotine', rotine_id = id)) 
     
+def checkCondicionalData(Data, estado):
+    data_hora_obj = datetime.strptime(Data, "%d/%m/%Y %H:%M")
+    data_hora_atual = datetime.now()
+    if data_hora_obj == data_hora_atual:
 
 def checkCondicionalTemperatura(num, cond, comp, estado):
     atuador, cor, status = estado
 
     status = mudaStatus(status)
     cor = mudaCor(cor)
-
-    print("atuador: " + atuador)
-    print("cor: " + cor)
-    print("status: " + str(status))
+    print(f"\n[BY TEMP]")
+    print(f"\tAtuador:" + atuador)
+    print(f"\tCor: " + cor)
+    print(f"\tStatus: " + str(status))
 
     if(cond == ">"):
         if (num > int(comp)):
             if(atuador == "luz"):
                 setluz(int(status),cor)
-                print(" esta aqui no if da luz ")
+                
     elif(cond == ">="):
         if (num >= int(comp)):
             if(atuador == "luz"):
                 setluz(int(status),cor)
-                print(" esta aqui no if da luz ")
+                
     elif(cond == "<="):
         if (num <= int(comp)):
             if(atuador == "luz"):
                 setluz(int(status),cor)
-                print(" esta aqui no if da luz ")
+                
     elif(cond == "="):
         if (num == int(comp)):
             if(atuador == "luz"):
                 setluz(int(status),cor)
-                print(" esta aqui no if da luz ")
+                
 
     elif(cond == "<"):
         if (num < int(comp)):
             if(atuador == "luz"):
                 setluz(int(status),cor)
-                print(" esta aqui no if da luz ")
 
 
 def mudaStatus(status):
@@ -156,29 +159,36 @@ def checkCondicionalLuminosidade(num, cond, comp, estado):
     atuador, cor, status = estado
     status = mudaStatus(status)
     cor = mudaCor(cor)
-    print("atuador:" + atuador)
-    print(f"cor:{cor}")
-    print(f"status:{status}")
+    print(f"\n[BY TEMP]")
+    print(f"\tAtuador:" + atuador)
+    print(f"\tCor: " + cor)
+    print(f"\tStatus: " + str(status))
+
     if(cond == ">"):
         if (num > int(comp)):
-            ligar_luz(cor, status)
-        # elif ...
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                
     elif(cond == ">="):
         if (num >= int(comp)):
-            ligar_luz(cor, status)
-        # elif ...
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                
     elif(cond == "<="):
         if (num <= int(comp)):
-            ligar_luz(cor, status)
-        # elif ...
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                
     elif(cond == "="):
         if (num == int(comp)):
-            ligar_luz(cor, status)
-        # elif ...
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                
+
     elif(cond == "<"):
         if (num < int(comp)):
-            ligar_luz(cor, status)
-        # elif ...
+            if(atuador == "luz"):
+                setluz(int(status),cor)
 
 def splitString(string):
     return string.split(sep=" ")
@@ -186,12 +196,14 @@ def splitString(string):
 
 def checkrotines():
     print("checkrotines called")
+    time.sleep(0.5)
     while(True):
         querry = rotinas.select()
         for i in querry:
-            print(f"{i.condicao} --> {i.estado}")
+            print(f"\n[ROTINE]\t{i.condicao} --> {i.estado}")
             condicao = i.condicao.split(" ")
             estado = i.estado.split(" ")
+            print(f"\n[STATUS]")
             temp = gettemperatura()
             light = getluz()
 
@@ -201,9 +213,9 @@ def checkrotines():
             if condicao[0] == "luminosidade":
                 checkCondicionalLuminosidade(light, condicao[1], condicao[2], estado)
             if condicao[0] == "Data":
-                pass
+                checkCondicionalData(f"{condicao[1]} {condicao[2]}",estado)
         
-            time.sleep(20)
+            time.sleep(2)
 
 
 def setup():
