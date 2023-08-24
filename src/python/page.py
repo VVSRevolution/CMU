@@ -1,10 +1,12 @@
 from flask import *
 from db import *
 from thermometer_client import *
+from lightsensor_client import *
+from led_client import *
 import logging, threading, time
 import sys
 from datetime import datetime
-
+import math
 import grpc
 import iot_service_pb2, iot_service_pb2_grpc
 
@@ -109,13 +111,14 @@ def rotines():
 
 def checkCondicionalTemperatura(num, cond, comp, estado):
     atuador, cor, status = estado
-    print("atuador:" + atuador)
-    print("cor:" + cor)
-    print("status:" + status)
+    print("atuador: " + atuador)
+    print("cor: " + cor)
+    print("status: " + status)
+
     if(cond == ">"):
         if (num > int(comp)):
             if(atuador == "luz"):
-                blink
+                if()
             pass # Condição no caso TEMP > 
         
     elif(cond == ">="):
@@ -178,11 +181,11 @@ def checkrotines():
             condicao = i.condicao.split(" ")
             estado = i.estado.split(" ")
             temp = gettemperatura()
-            #light = lightsensor()
+            light = getluz()
 
 
             if condicao[0] == "temperatura":
-                checkCondicionalTemperatura(temp, condicao[1], condicao[2], estado)
+                checkCondicionalTemperatura(float(temp), condicao[1], condicao[2], estado)
             if condicao[0] == "luminosidade":
                 checkCondicionalLuminosidade(light, condicao[1], condicao[2], estado)
             if condicao[0] == "Data":
@@ -197,49 +200,11 @@ def setup():
     GRPC_PORT = input("\033[1m[SET UP]:\033[0m\t\tEntre com GRPC PORT: ")
 
 
-def ligar_luz(luz ,estado):
-    global GRPC_SERVER, GRPC_PORT
-    with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
-        stub = iot_service_pb2_grpc.IoTServiceStub (channel)
-        response = stub.BlinkLed(iot_service_pb2.LedRequest(state=int(estado),ledname=luz))
-
-    if response.ledstate[sys.argv[2]] == 1:
-        print("Led state is on")
-    else:
-        print("Led state is off")
-
-#def adjustLightLevel(lightLevelString):
-#    lightLevelNumber = int(lightLevelString)
-#    return lightLevelNumber - 100)
-
-def lightsensor():
-    try:
-        global GRPC_SERVER, GRPC_PORT
-        with grpc.insecure_channel(GRPC_SERVER+':'+GRPC_PORT) as channel:
-            stub = iot_service_pb2_grpc.IoTServiceStub(channel)
-            response = stub.SayLightLevel(iot_service_pb2.LightLevelRequest(sensorName='my_sensor'))
-
-        print("Light level received: " + response.lightLevel)
-        return response.lightLevel
-    except:
-        return 25
-
-def thermometer():
-    print("thermometer called")
-    logging.basicConfig()
-
-    with grpc.insecure_channel(f"{GRPC_SERVER}:{GRPC_PORT}") as channel:
-        stub = iot_service_pb2_grpc.IoTServiceStub(channel)
-        response = stub.SayTemperature(iot_service_pb2.TemperatureRequest(sensorName='my_sensor'))
-
-    print("thermometer try called")
-    print("Temperature received: " + response.temperature)
-    return response.temperature
 
 
 if __name__ == "__main__":
     logging.basicConfig()
-    setup()
+    #setup()
     check = threading.Thread(target=checkrotines)
     check.start()
     app.run(debug=True,  use_reloader=False, port=12345)
