@@ -108,9 +108,21 @@ def rotines():
         return redirect(url_for('delete_rotine', rotine_id = id)) 
     
 def checkCondicionalData(Data, estado):
+    atuador, cor, status = estado
+
+    status = mudaStatus(status)
+    cor = mudaCor(cor)
+    print(f"\n[BY TEMP]")
+    print(f"\tAtuador:" + atuador)
+    print(f"\tCor: " + cor)
+    print(f"\tStatus: " + str(status))
+    
     data_hora_obj = datetime.strptime(Data, "%d/%m/%Y %H:%M")
     data_hora_atual = datetime.now()
     if data_hora_obj == data_hora_atual:
+        if(atuador == "luz"):
+                setluz(int(status),cor)
+
 
 def checkCondicionalTemperatura(num, cond, comp, estado):
     atuador, cor, status = estado
