@@ -47,7 +47,7 @@ def home():
             if(json['condition'] == "menorigual"): condicional += " <= "
             if(json['condition'] == "igual"): condicional += " = "
             if(json['condition'] == "maiorr"): condicional += " > "
-            if(json['condition'] == "maiorigual"): condicional += " < "
+            if(json['condition'] == "maiorigual"): condicional += " >= "
             if json['optionSelect'] == "luminosidade": condicional += json['luminosidade']
             if json['optionSelect'] == "temperatura": condicional += json['temperatura']
         if 'dateTime' in json:
@@ -116,7 +116,7 @@ def checkCondicionalData(Data, estado):
     print(f"\tAtuador:" + atuador)
     print(f"\tCor: " + cor)
     print(f"\tStatus: " + str(status))
-    
+
     data_hora_obj = datetime.strptime(Data, "%d/%m/%Y %H:%M")
     data_hora_atual = datetime.now()
     if data_hora_obj == data_hora_atual:
@@ -227,7 +227,7 @@ def checkrotines():
             if condicao[0] == "Data":
                 checkCondicionalData(f"{condicao[1]} {condicao[2]}",estado)
         
-            time.sleep(2)
+            #time.sleep(2)
 
 
 def setup():
