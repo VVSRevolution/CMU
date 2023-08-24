@@ -77,7 +77,6 @@ def home():
     return render_template("table_enviar.html")
 
 
-
 @app.route("/delete_rotine/<int:rotine_id>")
 def delete_rotine(rotine_id):
 
@@ -111,28 +110,41 @@ def rotines():
 
 def checkCondicionalTemperatura(num, cond, comp, estado):
     atuador, cor, status = estado
+
+    status = mudaStatus(status)
+    cor = mudaCor(cor)
+
     print("atuador: " + atuador)
     print("cor: " + cor)
-    print("status: " + status)
+    print("status: " + str(status))
 
     if(cond == ">"):
         if (num > int(comp)):
             if(atuador == "luz"):
-                if()
-            pass # Condição no caso TEMP > 
-        
+                setluz(int(status),cor)
+                print(" esta aqui no if da luz ")
     elif(cond == ">="):
         if (num >= int(comp)):
-            pass # Condição no caso TEMP >= COND2
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                print(" esta aqui no if da luz ")
     elif(cond == "<="):
         if (num <= int(comp)):
-            pass # Condição no caso TEMP <= COND2
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                print(" esta aqui no if da luz ")
     elif(cond == "="):
         if (num == int(comp)):
-            pass # Condição no caso TEMP = COND2
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                print(" esta aqui no if da luz ")
+
     elif(cond == "<"):
         if (num < int(comp)):
-            pass # Condição no caso TEMP < COND2
+            if(atuador == "luz"):
+                setluz(int(status),cor)
+                print(" esta aqui no if da luz ")
+
 
 def mudaStatus(status):
     return 0 if status == "Desligada" else 1
@@ -191,7 +203,7 @@ def checkrotines():
             if condicao[0] == "Data":
                 pass
         
-                time.sleep(2)
+            time.sleep(20)
 
 
 def setup():
@@ -207,4 +219,4 @@ if __name__ == "__main__":
     #setup()
     check = threading.Thread(target=checkrotines)
     check.start()
-    app.run(debug=True,  use_reloader=False, port=12345)
+    app.run(debug=True,  use_reloader=False, port=8080)
